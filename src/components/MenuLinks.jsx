@@ -6,17 +6,24 @@ const MenuLinks = () => {
     data: quizzes,
     error,
     isPending,
-  } = useFetch('http://localhost:3000/quizzes')
+  } = useFetch(
+    'https://online-json-server-api.up.railway.app/project/66abf970340dd55056fb1ba6/quizzes'
+  )
 
+  console.log(quizzes)
   return (
     <div>
       {isPending && <p>Loading...</p>}
       {error && <p>{error}</p>}
       <div className="menu-list">
         {quizzes &&
-          quizzes.map((item) => {
+          quizzes.data.map((item) => {
             return (
-              <Link to={`/quiz/${item.title}`} key={item.title} className="menu-item header-logo">
+              <Link
+                to={`/quiz/${item.title}`}
+                key={item.title}
+                className="menu-item header-logo"
+              >
                 <figure style={{ backgroundColor: item.color }}>
                   <img src={item.icon} alt={item.title} />
                 </figure>
